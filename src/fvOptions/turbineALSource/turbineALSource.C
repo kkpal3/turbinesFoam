@@ -308,7 +308,9 @@ bool Foam::fv::turbineALSource::read(const dictionary& dict)
 
         // Read coordinate system/geometry invariant properties
         coeffs_.lookup("origin") >> origin_;
-        coeffs_.lookup("axis") >> axis_;
+        coeffs_.lookup("yaw") >> yaw_;
+        axis_ = vector(-Foam::cos(yaw_*mathematical::pi/180), 0, Foam::sin(yaw_*mathematical::pi/180));
+        //coeffs_.lookup("axis") >> axis_;
         axis_ /= mag(axis_);
         coeffs_.lookup("freeStreamVelocity") >> freeStreamVelocity_;
         coeffs_.lookup("tipSpeedRatio") >> meanTSR_;
