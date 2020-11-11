@@ -112,6 +112,12 @@ protected:
 
         //- Dictionary for profile coefficient data
         dictionary profileData_;
+        
+        //- Blade pitch angle
+        scalar blPitch_;
+
+        //- Rotor yaw angle;
+        scalar yaw_;
 
         //- Force vector
         vector force_;
