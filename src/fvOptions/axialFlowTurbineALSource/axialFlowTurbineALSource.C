@@ -94,6 +94,9 @@ void Foam::fv::axialFlowTurbineALSource::createBlades()
         bladeSubDict.add("freeStreamVelocity", freeStreamVelocity_);
         bladeSubDict.add("fieldNames", coeffs_.lookup("fieldNames"));
         bladeSubDict.add("profileData", profileData_);
+      
+        //add blade pitch 
+        bladeSubDict.add("pitch", blPitch_);    //  pitch angle of the rotor, NOT the rotor
 
         // Disable individual lifting line end effects model if rotor-level
         // end effects model is active
@@ -135,7 +138,7 @@ void Foam::fv::axialFlowTurbineALSource::createBlades()
             scalar azimuthRadians = degToRad(azimuthDegrees);
             scalar chordLength = elementData[j][3];
             scalar chordMount = elementData[j][4];
-            scalar pitch = elementData[j][5];
+            scalar pitch = elementData[j][5] - blPitch_;
 
             // Find max radius for calculating frontal area
             if (radius > maxRadius)
